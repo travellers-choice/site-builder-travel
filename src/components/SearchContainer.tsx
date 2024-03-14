@@ -67,6 +67,7 @@ export default function SearchContainer({
                 <div
                   onClick={() => {
                     setSearchAttractions(destination);
+                    setSearchValue('')
                     setSearching(false);
                   }}
                   key={index}
@@ -109,7 +110,15 @@ export default function SearchContainer({
             </div>
           </div>
 
-          <button className="h-full w-[100px] md:w-auto px-10  rounded bg-blue-500 flex items-center text-white justify-center">
+          <button
+            onClick={() => {
+              if(searchValue.trim()!==''){
+                setSearchAttractions(searchValue as InitialAttractionDestiantions);
+                  setSearchValue('')
+                }
+              setSearching(false);
+            }}
+           className="h-full w-[100px] md:w-auto px-10  rounded bg-blue-500 flex items-center text-white justify-center">
             SEARCH
           </button>
         </div>
