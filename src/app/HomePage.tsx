@@ -3,6 +3,8 @@ import SearchContainer from "@/components/SearchContainer";
 import React from "react";
 import { MdKeyboardArrowLeft ,MdKeyboardArrowRight} from "react-icons/md";
 import { FaStar } from "react-icons/fa";
+
+
 export default function HomePage(): React.ReactElement {
   return (
     <main>
