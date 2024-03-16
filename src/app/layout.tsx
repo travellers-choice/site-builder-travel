@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import Header from "@/components/Header";
 import Footer from "@/components/Footer";
+import { ReduxProvider } from "@/redux/Provider";
+import FetctInitialData from "./FetctInitialData";
 
 export const metadata: Metadata = {
   title: "Create Next App",
@@ -15,10 +17,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className="max-w-[1500px]  mx-auto">
-        <Header />
-        {children}
-        <Footer />
+      <body className="max-w-[1500px]  mx-auto ">
+        <ReduxProvider>
+          <FetctInitialData>
+            <Header />
+            {children}
+            <Footer />
+          </FetctInitialData>
+        </ReduxProvider>
       </body>
     </html>
   );

@@ -1,6 +1,7 @@
 import React, { Dispatch, SetStateAction, useEffect, useState } from "react";
 type RecommendedPropes = {
   sortOpen: boolean;
+  setRatingsArray:Dispatch<SetStateAction<number[]>>;
   setSortOpen: Dispatch<SetStateAction<boolean>>;
   setSliderValue:Dispatch<SetStateAction<number[]>>
   setFilters: Dispatch<
@@ -36,7 +37,8 @@ const Recommended: React.FC<RecommendedPropes> = ({
   sortOpen,
   setSortOpen,
   setLoading,
-  setSliderValue
+  setSliderValue,
+  setRatingsArray
 }) => {
 
   const [sortValue, setSortValue] = useState("All");
@@ -55,9 +57,10 @@ const Recommended: React.FC<RecommendedPropes> = ({
           destination: "",
           value: false,
         });
+        setRatingsArray([])
         setSliderValue([Math.round(priceRange.min),Math.round(priceRange.max)])
         setFilters({
-          ...filters,
+          category: [],
           priceFrom: Math.round(priceRange.min),
           priceTo: Math.round(priceRange.max),
         });
