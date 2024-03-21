@@ -2,15 +2,16 @@
 import React, { useEffect } from "react";
 import ActractionOrders from "./ActractionOrders";
 import { useSelector, useDispatch } from 'react-redux';
+import { setcurrentProfilePage } from "@/redux/features/UserSlice";
 // import { increment } from "@/redux/features/InitialSlice"; 
 
 export default function OrderPage() {
-  const { countries} = useSelector((state: any) => state.initials)
-  // const dispatch = useDispatch();
+  // const { countries} = useSelector((state: any) => state.initials)
+  const dispatch = useDispatch()
+  useEffect(() => {
+    dispatch(setcurrentProfilePage({page:'Orders'}))
+  });
 
- useEffect(()=>{
-  console.log(countries,'countries--');
- })
 
   return (
     <div className="p-5 lg:pt-[100px]">

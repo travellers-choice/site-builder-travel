@@ -1,20 +1,54 @@
 
 import { capitalizeFirstLetters ,priceConversion} from '@/utility/commonFunctions';
-import React, { useEffect } from 'react'
+import React, { useEffect, useMemo, useState } from 'react'
 import { FaStar } from "react-icons/fa";
+import { useDispatch, useSelector } from "react-redux";
+import { AppDispatch, RootState } from "@/redux/store";
+import { handleSetFavourites } from "@/redux/features/attractionSlice";
+import { IoIosHeart,IoIosHeartEmpty } from "react-icons/io";
+
 type AttractionCardProps={
   attraction:any
 }
 export default function AttractionCard({attraction}:AttractionCardProps) {
+  const dispatch = useDispatch<AppDispatch>()
+  const { favourites } = useSelector((state: RootState) => state?.attractions)
+  // const [isLiked,setIsLiked]=useState(false)
+  const isLiked = useMemo(() => {
+    const liked = favourites?.find((item:any) => item._id === attraction?._id)
+    if (liked) {
+      return true
+    } else {
+      return false
+    }
+  }, [favourites,attraction?._id])
+
+
   function formatNumberToOneDecimalPlace(num: number): string {
     return num.toFixed(1);
   }
+
+    // handler for liking the attraction.
+    const handleLikeExc = (e:React.MouseEvent) => {
+      if (attraction) {
+        dispatch(handleSetFavourites(attraction))
+      }
+      e.stopPropagation()
+    }
+
 
 
 
   return (
     <div className='col-span-6 sm:col-span-3 lg:col-span-2 h-[350px]  border'>
         <div className='w-full h-[200px] relative'>
+          <IoIosHeart
+
+          onClick={handleLikeExc}
+           className={`${isLiked?'absolute right-5 top-5 text-red-600 cursor-pointer':'hidden'} `}/>
+          <IoIosHeartEmpty
+          onClick={handleLikeExc}
+           className='absolute right-5 top-5 text-white cursor-pointer'/>
           <div className='w-[90px] h-[30px] bg-blue-400 absolute left-0 top-[10%] text-white rounded-r-lg text-sm flex justify-center items-center'>{capitalizeFirstLetters(attraction?.bookingType)}</div>
         <img className='w-full h-full' src={`${process.env.NEXT_PUBLIC_SERVER_URL+attraction?.images[0]}`}alt="" />
         </div>
