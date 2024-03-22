@@ -179,8 +179,8 @@ const activityIds = activities.map((activity) => activity._id);
             <IoChevronDownSharp className="inline-block mb-1 ml-11" />
           </span>
           {isCalendarOpen && (
-            <div className="absolute top-14 right-0 bg-white border border-gray-300 p-3 rounded shadow-lg w-[285px] h-300px">
-              <Calendar onChange={handleDateChange} value={selectedDate} />
+            <div className="absolute z-10 top-14 right-0 bg-white border border-gray-300 p-3 rounded shadow-lg w-[285px] h-300px">
+              <Calendar  onChange={handleDateChange} value={selectedDate} />
             </div>
           )}
         </div>
