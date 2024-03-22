@@ -6,7 +6,7 @@ function ComponentLoader() {
       role="status"
       className="space-y-8 animate-pulse md:space-y-0 md:space-x-8 rtl:space-x-reverse md:flex md:items-center"
     >
-      <div className="flex items-center justify-center w-full h-48 bg-blue-100 rounded sm:w-96 dark:bg-blue-700">
+      <div className="flex items-center justify-center w-full h-48 bg-blue-100 rounded sm:w-96">
         <svg
           className="w-10 h-10 text-blue-200 dark:text-blue-600"
           aria-hidden="true"
@@ -18,12 +18,12 @@ function ComponentLoader() {
         </svg>
       </div>
       <div className="w-full">
-        <div className="h-2.5 bg-blue-200 rounded-full dark:bg-blue-700 w-48 mb-4"></div>
-        <div className="h-2 bg-blue-200 rounded-full dark:bg-blue-700 max-w-[480px] mb-2.5"></div>
-        <div className="h-2 bg-blue-200 rounded-full dark:bg-blue-700 mb-2.5"></div>
-        <div className="h-2 bg-blue-200 rounded-full dark:bg-blue-700 max-w-[440px] mb-2.5"></div>
-        <div className="h-2 bg-blue-200 rounded-full dark:bg-blue-700 max-w-[460px] mb-2.5"></div>
-        <div className="h-2 bg-blue-200 rounded-full dark:bg-blue-700 max-w-[360px]"></div>
+        <div className="h-2.5 bg-blue-200 rounded-full w-48 mb-4"></div>
+        <div className="h-2 bg-blue-200 rounded-full max-w-[480px] mb-2.5"></div>
+        <div className="h-2 bg-blue-200 rounded-full mb-2.5"></div>
+        <div className="h-2 bg-blue-200 rounded-full max-w-[440px] mb-2.5"></div>
+        <div className="h-2 bg-blue-200 rounded-full max-w-[460px] mb-2.5"></div>
+        <div className="h-2 bg-blue-200 rounded-full max-w-[360px]"></div>
       </div>
       <span className="sr-only">Loading...</span>
     </div>

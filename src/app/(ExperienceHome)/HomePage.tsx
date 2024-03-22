@@ -9,6 +9,7 @@ import AttractionCard from "../../components/AttractionCard";
 import Filter from "../../components/Filter";
 import SearchContainer from "../../components/SearchContainer";
 import Recommended from "../../components/Recommended";
+
 export default function HomePage(): React.ReactElement {
   const [allAttraction, setAttraction] = useState<any[]>([]);
   const [ratingsArray, setRatingsArray] = useState<number[]>([]);
@@ -245,12 +246,12 @@ export default function HomePage(): React.ReactElement {
           </section>
 
           {loading ? (
-            <>
+            <div className="space-y-2">
               <ComponentLoader />
               <ComponentLoader />
               <ComponentLoader />
               <ComponentLoader />
-            </>
+            </div>
           ) : (
             <section className="grid grid-cols-6 gap-4 ">
               {allAttraction?.map((attraction: any, index: number) => {
