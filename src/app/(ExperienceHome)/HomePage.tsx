@@ -60,12 +60,9 @@ export default function HomePage(): React.ReactElement {
             process.env.NEXT_PUBLIC_SERVER_URL
           }/api/v1/attractions/all?limit=${limit}&skip=${skip}&destination=${
             search?.destination
-          }
-          &ratings=[${ratingsArray.join(",")}]&categories=${JSON.stringify(
+          }&ratings=[${ratingsArray.join(",")}]&categories=${JSON.stringify(
             filters.category
-          )}&priceFrom=${JSON.stringify(
-            filters.priceFrom
-          )}&priceTo=${JSON.stringify(filters.priceTo)}`
+          )}`
         );
       }
       return await response.json();
