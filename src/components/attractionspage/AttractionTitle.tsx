@@ -1,11 +1,15 @@
 import React from "react";
 import { MdLocationOn } from "react-icons/md";
 
-interface Data{
-  title:string
+interface Data {
+  title: string;
+  destination: {
+    name: string;
+  };
 }
 
-export default function AttractionTitle({data}:{data:Data}) {
+export default function AttractionTitle({ data }: { data: Data }) {
+  const location = data.destination;
   return (
     <div className="mt-4 max-[320px]:text-start">
       <h1 className="font-Poppins text-3xl font-medium 	text-[#1a2b48] max-[560px]:text-2xl">
@@ -20,7 +24,7 @@ export default function AttractionTitle({data}:{data:Data}) {
           color="black"
           className="text-[#1a2b48] font-Poppins font-thin"
         />
-        <span> Prince St Station</span>
+        <span> {location.name.toUpperCase()}</span>
       </div>
     </div>
   );

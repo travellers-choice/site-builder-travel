@@ -1,6 +1,10 @@
 import React, { useState, useRef, useEffect, MouseEvent } from "react";
 
-export default function Photos() {
+interface Data{
+  images:[]
+}
+
+export default function Photos({data}:{data:Data}) {
   const imageArray: string[] = [
     "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-1.jpg",
     "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-2.jpg",

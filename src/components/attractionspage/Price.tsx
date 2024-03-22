@@ -7,13 +7,50 @@ import {
 import ModalEnquiry from "./ModalEnquiry";
 import Calendar, { CalendarProps } from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import TransferDropdown from "./TransferDropdown";
+import { useRouter } from "next/navigation";
 
-export default function Price() {
+interface BookingData {
+  adultCount: number;
+  childCount: number;
+  infantCount: number;
+  date: Date;
+  type: string;
+  activityName: string;
+  activityIds: string[];
+  location: string;
+  duration: number;
+  adultPrice: number;
+  childPrice: number;
+  infantPrice: number;
+}
+
+interface Data {
+  activities: {
+    adultAgeLimit: number;
+    adultPrice: number;
+    childAgeLimit: number;
+    childPrice: number;
+    infantAgeLimit: number;
+    infantPrice: number;
+    _id: string;
+    isTransferAvailable: boolean;
+  }[];
+  title: string;
+  destination: {
+    name: string;
+  };
+  duration: number;
+}
+
+export default function Price({ data }: { data: Data }) {
   const [count, setCount] = useState(1);
   const [child, setChild] = useState(0);
+  const [infant, setInfant] = useState(0);
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isCalendarOpen, setIsCalendarOpen] = useState<boolean>(false);
   const [selectedDate, setSelectedDate] = useState<Date>(new Date());
+  const [transferType, setTransferType] = useState("without");
 
   const handleEnquiryClick = () => {
     setIsModalOpen(true);
@@ -34,23 +71,73 @@ export default function Price() {
     }
   };
 
-
   const handleCountDecrease = () => {
-    setCount(Math.max(1, count - 1)); 
+    setCount(Math.max(1, count - 1));
   };
 
   const handleCountIncrease = () => {
-    setCount(count + 1); 
+    setCount(count + 1);
   };
 
   const handleChildDecrease = () => {
-    setChild(Math.max(0, child - 1)); 
+    setChild(Math.max(0, child - 1));
   };
 
   const handleChildIncrease = () => {
-    setChild(child + 1); 
+    setChild(child + 1);
   };
 
+  const handleInfantDecrease = () => {
+    setInfant(Math.max(0, infant - 1));
+  };
+
+  const handleInfantIncrease = () => {
+    setInfant(infant + 1);
+  };
+
+  const handleTransferTypeChange = (type: string) => {
+    setTransferType(type);
+  };
+
+  const activities = data.activities;
+
+  const isTransferAvailable = activities.map((activity)=>activity.isTransferAvailable)
+
+  const activityName = data.title;
+const activityIds = activities.map((activity) => activity._id);
+
+
+
+  const location = data.destination.name;
+  const duration = data.duration;
+
+  const adultPrice = activities[0].adultPrice;
+  const childPrice = activities[0].childPrice;
+
+  const infantPrice = activities[0].childPrice;
+
+  const router = useRouter();
+
+  const handleBooking = () => {
+    const bookingData: BookingData = {
+      adultCount: count,
+      childCount: child,
+      infantCount: infant,
+      date: selectedDate,
+      type: transferType,
+      activityName: activityName,
+      activityIds:activityIds,
+      location: location,
+      duration: duration,
+      adultPrice: adultPrice,
+      childPrice: childPrice,
+      infantPrice: infantPrice,
+    };
+
+    const queryString = new URLSearchParams(bookingData as any).toString();
+
+    router.push(`/booking?${queryString}`);
+  };
 
   return (
     <main className="flex flex-col mt-[73px] p-3 m-4">
@@ -98,6 +185,19 @@ export default function Price() {
           )}
         </div>
       </section>
+      <section className="border-x-2 border-b-2 flex">
+        <div className="p-4 flex flex-col">
+          <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
+            Choose Transfer Type?
+          </span>
+          <span className="border-2 rounded-lg py-2 px-8 mt-3">
+            <TransferDropdown
+              isTransferAvailable={isTransferAvailable}
+              onSelect={handleTransferTypeChange}
+            />
+          </span>
+        </div>
+      </section>
 
       <section className="border-x-2 flex">
         <div className="flex  flex-col p-4">
@@ -105,10 +205,10 @@ export default function Price() {
             Adult
           </span>
           <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1">
-            Age 18+
+            Age {activities[0]?.adultAgeLimit}+
           </span>
           <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-0">
-            $1.00 per person
+            ${activities[0]?.adultPrice} per person
           </span>
         </div>
         <div className="flex items-center">
@@ -130,10 +230,10 @@ export default function Price() {
             Child
           </span>
           <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1">
-            Age 6-17
+            Age {activities[0]?.childAgeLimit}
           </span>
           <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-0">
-            $300 per person
+            ${activities[0]?.childPrice} per person
           </span>
         </div>
         <div className="flex items-center ml-1">
@@ -148,9 +248,36 @@ export default function Price() {
           />
         </div>
       </section>
+      <section className="border-x-2 border-b-2 flex">
+        <div className="flex  flex-col p-4">
+          <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
+            Infant
+          </span>
+          <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1">
+            Age {activities[0]?.infantAgeLimit}
+          </span>
+          <span className="font-Poppins text-sm font-normal text-[#5e6d77] mt-0">
+            ${activities[0]?.infantPrice} per person
+          </span>
+        </div>
+        <div className="flex items-center ml-1">
+          <IoIosRemoveCircleOutline
+            className="text-[#5191fa] text-xl"
+            onClick={handleInfantDecrease}
+          />
+          <span className="p-3">{infant}</span>
+          <IoIosAddCircleOutline
+            className="text-[#5191fa] text-xl"
+            onClick={handleInfantIncrease}
+          />
+        </div>
+      </section>
       <section className="border-b-2 border-x-2 ">
         <div className=" py-3 text-center">
-          <button className="btn bg-[#5191fa] py-4 px-7 text-[#fff] w-[200px] rounded-md">
+          <button
+            className="btn bg-[#5191fa] py-4 px-7 text-[#fff] w-[200px] rounded-md"
+            onClick={handleBooking}
+          >
             <span className="text-md font-medium">BOOK NOW</span>
           </button>
         </div>

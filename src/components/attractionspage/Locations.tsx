@@ -8,7 +8,7 @@ interface Location {
 
 export default function Locations({ location }: { location: Location }) {
   return (
-    <div className=" w-full h-full relative padding ">
+    <div className=" w-full h-full relative ">
       <img
         src="https://mytravellerschoice.com/_next/image?url=%2F_next%2Fstatic%2Fmedia%2Fmap.1b4e4646.jpg&w=1920&q=75"
         alt="Location"
