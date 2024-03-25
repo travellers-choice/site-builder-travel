@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "@/redux/store";
 import { handleSetFavourites } from "@/redux/features/attractionSlice";
 import { IoIosHeart,IoIosHeartEmpty } from "react-icons/io";
+import Link from 'next/link';
 
 type AttractionCardProps={
   attraction:any
@@ -40,7 +41,7 @@ export default function AttractionCard({attraction}:AttractionCardProps) {
 
 
   return (
-    <div className='col-span-6 sm:col-span-3 lg:col-span-2 h-[350px]  border'>
+    <div  className='col-span-6 sm:col-span-3 lg:col-span-2 h-[350px]  border'>
         <div className='w-full h-[200px] relative'>
           <IoIosHeart
 
@@ -50,9 +51,13 @@ export default function AttractionCard({attraction}:AttractionCardProps) {
           onClick={handleLikeExc}
            className='absolute right-5 top-5 text-white cursor-pointer'/>
           <div className='w-[90px] h-[30px] bg-blue-400 absolute left-0 top-[10%] text-white rounded-r-lg text-sm flex justify-center items-center'>{capitalizeFirstLetters(attraction?.bookingType)}</div>
+       <Link href={`/${attraction.slug}`}>
+
         <img className='w-full h-full' src={`${process.env.NEXT_PUBLIC_SERVER_URL+attraction?.images[0]}`}alt="" />
+       </Link>
         </div>
-      <div className='p-2 w-full h-[150px] '>
+        <Link href={`/${attraction.slug}`}>
+      <div className='p-2 w-full h-[150px]'>
         
             <h1 className=''>{capitalizeFirstLetters(attraction?.title)}</h1>
 
@@ -79,6 +84,8 @@ export default function AttractionCard({attraction}:AttractionCardProps) {
             </div>
              </div>
       </div>
+        </Link>
+
     </div>
   )
 }

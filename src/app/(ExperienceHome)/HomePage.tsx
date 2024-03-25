@@ -59,12 +59,9 @@ export default function HomePage(): React.ReactElement {
             process.env.NEXT_PUBLIC_SERVER_URL
           }/api/v1/attractions/all?limit=${limit}&skip=${skip}&destination=${
             search?.destination
-          }
-          &ratings=[${ratingsArray.join(",")}]&categories=${JSON.stringify(
+          }&ratings=[${ratingsArray.join(",")}]&categories=${JSON.stringify(
             filters.category
-          )}&priceFrom=${JSON.stringify(
-            filters.priceFrom
-          )}&priceTo=${JSON.stringify(filters.priceTo)}`
+          )}`
         );
       }
       return await response.json();
@@ -93,7 +90,6 @@ export default function HomePage(): React.ReactElement {
             ","
           )}]&categories=${JSON.stringify(filters.category)}`
         );
-        // setSearch({ destination: destination as string, value: true });
         return response.json();
       } else {
         const response = await fetch(
@@ -105,7 +101,6 @@ export default function HomePage(): React.ReactElement {
             filters.category
           )}`
         );
-        // setSearch({ destination: destination?.name as string, value: true });
         return response.json();
       }
     }
@@ -190,9 +185,9 @@ export default function HomePage(): React.ReactElement {
     <main>
       <SearchContainer setSearchAttractions={setSearchAttractions} />
 
-      <div className="my-16 padding flex flex-col gap-5"></div>
+      
 
-      <section className="padding flex flex-col md:flex-row gap-3 mt-20 ">
+      <section className="padding flex flex-col md:flex-row gap-3 mt-10 sm:mt-16 md:mt-[100px] ">
         <Filter
           setSliderValue={setSliderValue}
           sliderValue={sliderValue}

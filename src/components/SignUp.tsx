@@ -117,8 +117,6 @@ export default function SignUp({setSignUpModal,setLoginModal}:signUpProps) {
   async function googleProcess() {
     try {
       const response = await googleSignIn();
-      console.log(response,'ggooggggggggggggggggggggggggggggle');
-      
       dispatch(setUser(response));
       // dispatch(fetchAffiliateUser() as any);
       {

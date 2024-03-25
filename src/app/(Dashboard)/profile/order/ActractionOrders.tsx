@@ -1,69 +1,33 @@
-import React from 'react'
+import Link from "next/link";
+import React from "react";
 
 export default function ActractionOrders() {
   return (
     <div>
       <h1 className="text-2xl sm:text-2xl md:text-3xl font-medium my-10 ">
-      Attraction Orders
+        Attraction Orders
       </h1>
-
-      <section className='w-full  h-fit overflow-x-scroll border'>
-        <section className=' flex font-base text-[12px] sm:text-sm whitespace-nowrap text-center font-semibold '>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[60px]'>Index</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[200px] sm:w-[230px]'>Title</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Order Date</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[130px] sm:w-[150px]'>Execution Time</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]' >Total</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Paid</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Remain</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Status</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Action</div>
+      <Link href={'/profile/order/order-details'} className="w-full flex flex-col sm:flex-row gap-3  h-fit border rounded-xl overflow-hidden p-2 ">
+        <img
+          className="w-full sm:w-[250px] h-[200px]  sm:h-[150px]  rounded-xl flex-shrink-0"
+          src="https://mytravellerschoice.com/_next/image?url=https%3A%2F%2Fapi-server-i1.mytravellerschoice.com%2Fpublic%2Fimages%2Fhome%2Fimages-1672464923312-853360323.jpg%20&w=828&q=75"
+          alt="img"
+        />
+        <section className="w-full text-sm flex flex-col h-[200px]  sm:h-[150px] justify-between">
+          <div className="flex justify-between">
+          <h1>Ref No: B2CATO_1710933715074814</h1>
+          <h1>Wed Mar 20 2024</h1>
+          </div>
+          <h1>Name: DUBAI PARKS & RESORTS</h1>
+          <h1>Adult Count:1</h1>
+          <h1>Child Count:1</h1>
+          <div  className="flex justify-between">
+          <h1>Status: pending</h1>
+          <h1>Total Amount: 295.00 AED</h1>
+          </div>
         </section>
-
-        <section className=' flex font-base text-[12px] sm:text-sm text-stone-500 text-center '>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[60px]'>1</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[200px] sm:w-[230px] text-blue-500'>Jebel Jais Worlds Longest Zipline	</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>18/06/2024</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[130px] sm:w-[150px]'>18/06/2024</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]' >100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Processing</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Details</div>
-        </section>
-
-        <section className=' flex font-base text-[12px] sm:text-sm text-stone-500 text-center '>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[60px]'>1</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[200px] sm:w-[230px] text-blue-500'>Jebel Jais Worlds Longest Zipline	</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>18/06/2024</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[130px] sm:w-[150px]'>18/06/2024</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]' >100 AED</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Processing</div>
-            <div className='flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Details</div>
-        </section>
-
-        <section className=' flex font-base text-[12px] sm:text-sm text-stone-500 text-center '>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[60px]'>1</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[200px] sm:w-[230px] text-blue-500'>Jebel Jais Worlds Longest Zipline	</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>18/06/2024</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[130px] sm:w-[150px]'>18/06/2024</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]' >100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>100 AED</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Processing</div>
-            <div className='bg-gray-100 flex-shrink-0 border-r border-b p-2 w-[100px] sm:w-[120px]'>Details</div>
-        </section>
-
-       
-
-       
-
-      </section>
-
+      </Link>
       
-
     </div>
-  )
+  );
 }
