@@ -185,7 +185,7 @@ const timeout= setTimeout(() => {
             <input
               name="name"
               onChange={onChangeData}
-              value={profile?.name || user?.name}
+              value={profile?.name}
               required
               type="text"
               className="text-stone-500 w-full focus:ring-0 focus:outline-none border-2 rounded-md p-2"
@@ -198,7 +198,7 @@ const timeout= setTimeout(() => {
               name="email"
               onChange={onChangeData}
               type="email"
-              value={profile?.email || user?.email}
+              value={profile?.email}
               required
               className="text-stone-500 w-full focus:ring-0 focus:outline-none border-2 rounded-md p-2"
             />
@@ -232,7 +232,7 @@ const timeout= setTimeout(() => {
               onChange={
                 updatePnoneNumber
               }
-              value={profile?.phoneNumber || user?.phoneNumber}
+              value={profile?.phoneNumber }
               type="number"
               className="text-stone-500 w-full focus:ring-0 focus:outline-none border-2 rounded-md p-2"
             />
