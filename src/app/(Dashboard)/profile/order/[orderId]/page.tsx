@@ -3,12 +3,20 @@ import { setcurrentProfilePage } from '@/redux/features/UserSlice';
 import React, { useEffect } from 'react'
 import { useDispatch } from 'react-redux';
 import { LuArrowDownToLine } from "react-icons/lu";
-export default function page():React.ReactElement {
+export default function page(
+  {
+    params,
+  }: {
+    params: { orderId: string };
+  }
+):React.ReactElement {
 
     const dispatch = useDispatch()
     useEffect(() => {
       dispatch(setcurrentProfilePage({page:'Orders'}))
     });
+
+
 
   return (
     <div className='w-full h-full p-2'>
