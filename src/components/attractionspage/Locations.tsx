@@ -15,7 +15,7 @@ export default function Locations({ location }: { location: Location }) {
         className="object-cover mt-4 h-full w-full rounded-xl"
       />
       <a
-        href={location.mapLink}
+        href={location?.mapLink}
         className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 font-Poppins text-xl font-medium	text-[#1a2b48] flex items-center"
       >
         <MdLocationOn
@@ -23,7 +23,7 @@ export default function Locations({ location }: { location: Location }) {
           color="black"
           className="text-[#1a2b48] font-Poppins font-thin m-1"
         />{" "}
-        {location.title}
+        {location?.title}
       </a>
     </div>
   );

@@ -17,7 +17,7 @@ export default function Clock({ data }: { data: Data }) {
         <span className="text-m font-medium	text-[#1a2b48] flex flex-col ml-3">
           Duration
           <small className="font-Poppins text-sm font-normal text-[#5e6d77] -mt-1">
-            {data.duration} {data.durationType}
+            {data?.duration} {data?.durationType}
           </small>
         </span>
       </div>
@@ -27,7 +27,7 @@ export default function Clock({ data }: { data: Data }) {
         <span className="text-m font-medium	text-[#1a2b48]  flex flex-col ml-3">
           Tour Type
           <small className="font-Poppins text-sm font-normal text-[#5e6d77;] -mt-1 ml-1">
-            {data.bookingType}
+            {data?.bookingType}
           </small>
         </span>
       </div>

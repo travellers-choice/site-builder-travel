@@ -11,10 +11,7 @@ const TransferDropdown: React.FC<TransferDropdownProps> = ({
   onSelect,
 }) => {
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedOption, setSelectedOption] = useState( "without");
-
-  console.log(isTransferAvailable);
-  
+  const [selectedOption, setSelectedOption] = useState( "without");  
 
  const options = !isTransferAvailable
    ? ["without", "shared", "private"]
@@ -25,27 +22,38 @@ const TransferDropdown: React.FC<TransferDropdownProps> = ({
     setIsOpen(false);
     onSelect(option);
   };
+  
 
   return (
-    <div className="relative">
-      <span
-        className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1 cursor-pointer p-3"
-        onClick={() => setIsOpen(!isOpen)}
-      >
-        {selectedOption}
-        <IoChevronDownSharp className="inline-block mb-1 ml-3" />
-      </span>
+    <div className="relative inline-block text-left ">
+      <div>
+        <button
+          type="button"
+          className="inline-flex w-full justify-center gap-x-1.5 rounded-md bg-white px-3 py-2 text-sm font-semibold text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 hover:bg-gray-50"
+          id="menu-button"
+          aria-expanded="true"
+          aria-haspopup="true"
+          onClick={() => setIsOpen(!isOpen)}
+        >
+          {selectedOption}
+          <span className="mt-1"><IoChevronDownSharp/></span>
+        </button>
+      </div>
+
       {isOpen && (
-        <div className="absolute top-10 left-0 bg-white border-2 p-2 rounded shadow-lg">
-          {options.map((option, index) => (
-            <div
-              key={index}
-              className="cursor-pointer p-2 hover:bg-gray-200 hover:rounded-lg font-Poppins text-sm font-normal text-[#1a2b48]"
-              onClick={() => handleOptionSelect(option)}
-            >
-              {option}
-            </div>
-          ))}
+        <div className="absolute right-0 z-10 mt-2 w-56 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black ring-opacity-5 focus:outline-none">
+          <div className="py-1" role="none">
+            {options.map((option, index) => (
+              <div
+                key={index}
+                className="text-gray-700 block px-4 py-2 text-sm cursor-pointer hover:bg-gray-100 hover:text-gray-900"
+                onClick={() => handleOptionSelect(option)}
+                role="menuitem"
+              >
+                {option}
+              </div>
+            ))}
+          </div>
         </div>
       )}
     </div>

@@ -10,7 +10,7 @@ const ModalEnquiry: FC<ModalEnquiryProps> = ({ isOpen, onClose }) => {
   return (
     <div>
       {isOpen && (
-        <div className="fixed inset-0 flex items-center justify-center bg-black">
+        <div className="fixed inset-0 flex items-center justify-center bg-black bg-opacity-25">
           <div className="bg-white p-6 rounded-lg shadow-lg absolute top-0 left-1/2 transform -translate-x-1/2 mt-20  w-[500px] max-w-full">
             <h2 className="text-xl font-medium mb-4 border-b-2  p-3">
               Enquiry

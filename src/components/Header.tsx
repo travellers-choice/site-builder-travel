@@ -6,6 +6,7 @@ import SignUp from "./SignUp";
 import { useDispatch, useSelector } from "react-redux";
 import { logoutUser } from "@/redux/features/UserSlice";
 import { useSession, signIn, signOut } from "next-auth/react";
+
 import Link from "next/link";
 export default function Header() {
   const { user, jwtToken } = useSelector((state: any) => state.user);
@@ -67,7 +68,6 @@ export default function Header() {
           </Link>
         )}
       </div>
-          
     </div>
   );
 }

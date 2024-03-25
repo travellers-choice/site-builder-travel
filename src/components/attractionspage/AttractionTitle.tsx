@@ -9,11 +9,11 @@ interface Data {
 }
 
 export default function AttractionTitle({ data }: { data: Data }) {
-  const location = data.destination;
+  const location = data?.destination;
   return (
     <div className="mt-4 max-[320px]:text-start">
       <h1 className="font-Poppins text-3xl font-medium 	text-[#1a2b48] max-[560px]:text-2xl">
-        {data.title}
+        {data?.title}
       </h1>
       <div
         className="location mt-2"
@@ -24,7 +24,7 @@ export default function AttractionTitle({ data }: { data: Data }) {
           color="black"
           className="text-[#1a2b48] font-Poppins font-thin"
         />
-        <span> {location.name.toUpperCase()}</span>
+        <span> {location?.name?.toUpperCase()}</span>
       </div>
     </div>
   );

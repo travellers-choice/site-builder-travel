@@ -18,17 +18,16 @@ export default function DetailsPage({
   const [isSmallScreen, setIsSmallScreen] = useState(false);
 
   useEffect(() => {
-
     const fetchData = async () => {
       try {
         const response = await fetch(
           `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/attractions/single/${attractionname}`
         );
         if (!response.ok) {
-          throw new Error(`API request failed with status ${response.status}`);
+          throw new Error(`API request failed with status ${response?.status}`);
         }
 
-        const data = await response.json();
+        const data = await response?.json();
         setAttractionData(data);
       } catch (error) {
         console.error("Error fetching data:", error);
@@ -38,7 +37,7 @@ export default function DetailsPage({
     fetchData();
 
     function handleResize() {
-      setIsSmallScreen(window.innerWidth < 750);
+      setIsSmallScreen(window.innerWidth < 1030);
     }
     handleResize();
     window.addEventListener("resize", handleResize);
@@ -49,46 +48,50 @@ export default function DetailsPage({
     setIsModalOpen(!isModalOpen);
   };
 
-
   return (
     <>
       {attractionData ? (
-        <main className="padding flex flex-col md:flex-row border-t-2 box-border container mx-auto">
-          <div className="w-full md:w-9/12 padding relative">
-            <AttractionTitle data={attractionData} />
-            <Clock data={attractionData} />
-            <Photos data={attractionData}/>
-            <Overview data={attractionData} />
-          </div>
-          <aside className="w-full md:w-3/12 pt-4 pb-8 hidden md:block">
-            <Price data={attractionData} />
-          </aside>
-          {/* Button to toggle modal for Price component on small screens */}
-          {isSmallScreen && (
-            <div className="fixed bottom-4 right-4 z-50">
-              <button
-                className="btn bg-[#5191fa;] py-3 px-6 text-[#fff] rounded-md"
-                onClick={handleModalToggle}
-              >
-                Book Now
-              </button>
+        <main className="container mx-auto px-2 md:px-0">
+          <section className="padding flex border-t-2 box-border">
+            <div className="md:w-full lg:w-9/12 sm:w-full relative">
+              <AttractionTitle data={attractionData} />
+              <Clock data={attractionData} />
+              <Photos data={attractionData} />
+              <Overview data={attractionData} />
             </div>
-          )}
-
-          {/* Modal for Price component */}
-          {isModalOpen && (
-            <div className="fixed top-0 left-0 w-full h-full bg-gray-800 bg-opacity-70 flex justify-center items-center z-50 overflow-y-auto">
-              <div className="bg-white rounded-lg shadow-lg p-8 max-w-md w-full">
-                <Price data={attractionData} />
+            {/* Conditionally render Price component based on screen size */}
+            {isSmallScreen ? (
+              // Render modal button instead of Price component for small screens
+              <div className="pt-4 pb-8 fixed bottom-6 right-4 z-30">
                 <button
-                  className="btn bg-[#ff6347] py-3 px-6 text-[#fff] rounded-md mt-2 ml-7"
+                  className="btn bg-[#5191fa;] py-3 px-5 text-[#fff] rounded-md"
                   onClick={handleModalToggle}
                 >
-                  Close
+                  Book Now
                 </button>
               </div>
-            </div>
-          )}
+            ) : (
+              // Render Price component for screens larger than 1000px
+              <aside className="w-full md:w-3/12 lg:w-3/12 pt-4 pb-8 pl-3">
+                <Price data={attractionData} />
+              </aside>
+            )}
+
+            {/* Modal for Price component */}
+            {isModalOpen && (
+              <div className="fixed z-50 inset-0 bg-black bg-opacity-25 flex justify-center items-center padding overflow-y-auto">
+                <div className="bg-white rounded-lg w-[400px] flex flex-col">
+                  <button
+                    className="text-black-500 text-3xl place-self-end px-4 mt-2"
+                    onClick={handleModalToggle}
+                  >
+                    X
+                  </button>
+                  <Price data={attractionData} />
+                </div>
+              </div>
+            )}
+          </section>
         </main>
       ) : (
         <div className="space-y-2 p-5 mt-5">

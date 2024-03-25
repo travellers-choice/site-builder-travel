@@ -21,7 +21,7 @@ const Faqs: React.FC<FaqsProps> = ({ questions }) => {
 
   return (
     <div>
-      {questions.map((question) => (
+      {questions?.map((question) => (
         <section key={question.id} className="border-b-2">
           <div className="p-4 flex items-center">
             <FaCommentDots className="text-xl text-[#1a2b48]" />
@@ -37,7 +37,7 @@ const Faqs: React.FC<FaqsProps> = ({ questions }) => {
           <div className="">
             {activeId === question.id && (
               <p className="ml-4 text-wrap -mt-1 mb-5 font-Poppins text-sm font-normal 	text-[#5e6d77;]">
-                {question.answer}
+                {question?.answer}
               </p>
             )}
           </div>

@@ -5,15 +5,9 @@ interface Data{
 }
 
 export default function Photos({data}:{data:Data}) {
-  const imageArray: string[] = [
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-1.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-2.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-3.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-4.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-5.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-6.jpg",
-    "https://sandbox.bookingcore.co/uploads/demo/tour/gallery-7.jpg",
-  ];
+  
+  const imageArray:string[]=data?.images
+  
 
   const [selectedImage, setSelectedImage] = useState<string>(
     imageArray[0] // Select the first image by default
@@ -67,11 +61,11 @@ export default function Photos({data}:{data:Data}) {
     useDragScroll();
 
   return (
-    <div className="container mt-6 flex h-[300px] box-border">
+    <div className="container mt-6 flex h-[350px] box-border w-full">
       <div className="w-5/6 h-full">
         <img
           className="w-[100%] h-full object-cover"
-          src={selectedImage}
+          src={`${process.env.NEXT_PUBLIC_SERVER_URL}${selectedImage}`}
           alt="image"
         />
       </div>
@@ -83,10 +77,10 @@ export default function Photos({data}:{data:Data}) {
         onMouseUp={handleMouseUp}
         onMouseMove={handleMouseMove}
       >
-        {imageArray.map((image: string, key: number) => (
+        {imageArray?.map((image: string, key: number) => (
           <img
             key={key}
-            src={image}
+            src={`${process.env.NEXT_PUBLIC_SERVER_URL}${image}`}
             alt="Thumbnail"
             onClick={() => handleThumbnailClick(image)}
             className="h-full w-[100%] object-cover cursor-pointer m-1 md:shrink-0"

@@ -1,7 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
-
 import { InitialAttractionDestiantions } from "@/types/generaltypes";
 import { capitalizeFirstLetters } from "@/utility/commonFunctions";
 import ComponentLoader from "@/components/ComponentLoader";

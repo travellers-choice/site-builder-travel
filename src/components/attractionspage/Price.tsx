@@ -35,6 +35,7 @@ interface Data {
     infantPrice: number;
     _id: string;
     isTransferAvailable: boolean;
+    lowPrice: number;
   }[];
   title: string;
   destination: {
@@ -99,22 +100,24 @@ export default function Price({ data }: { data: Data }) {
     setTransferType(type);
   };
 
-  const activities = data.activities;
+  const activities = data?.activities;
 
-  const isTransferAvailable = activities.map((activity)=>activity.isTransferAvailable)
+  const isTransferAvailable = activities?.map(
+    (activity) => activity?.isTransferAvailable
+  );
 
-  const activityName = data.title;
-const activityIds = activities.map((activity) => activity._id);
+  const lowPrice = activities?.map((activity) => activity?.lowPrice);
 
+  const activityName = data?.title;
+  const activityIds = activities?.map((activity) => activity?._id);
 
+  const location = data?.destination?.name;
+  const duration = data?.duration;
 
-  const location = data.destination.name;
-  const duration = data.duration;
+  const adultPrice = activities[0]?.adultPrice;
+  const childPrice = activities[0]?.childPrice;
 
-  const adultPrice = activities[0].adultPrice;
-  const childPrice = activities[0].childPrice;
-
-  const infantPrice = activities[0].childPrice;
+  const infantPrice = activities[0]?.childPrice;
 
   const router = useRouter();
 
@@ -126,7 +129,7 @@ const activityIds = activities.map((activity) => activity._id);
       date: selectedDate,
       type: transferType,
       activityName: activityName,
-      activityIds:activityIds,
+      activityIds: activityIds,
       location: location,
       duration: duration,
       adultPrice: adultPrice,
@@ -140,15 +143,12 @@ const activityIds = activities.map((activity) => activity._id);
   };
 
   return (
-    <main className="flex flex-col mt-[73px] p-3 m-4">
-      <section className="border-t-4 border-x-2 border-t-[#5191fa] flex flex-col items-center p-6">
-        <span className="font-Poppins text-lg font-small text-[#c03] ml-8 line-through ">
-          $2100
-        </span>
+    <main className="flex flex-col container w-full lg:mt-[84px]">
+      <section className="border-t-4 border-x-2 border-t-[#5191fa] p-6 text-center">
         <h6 className="font-Poppins text-sm font-normal text-[#5e6d77] -mt-2">
           from
-          <span className="font-Poppins text-2xl font-medium text-[#1a2b48] ml-2">
-            $835
+          <span className="font-Poppins text-2xl font-medium text-[#c03] ml-2">
+            ${lowPrice}
           </span>
         </h6>
       </section>
@@ -167,39 +167,35 @@ const activityIds = activities.map((activity) => activity._id);
         </div>
       </section>
 
-      <section className="border-2 flex relative">
-        <div className="flex   p-4">
-          <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal	">
-            Start Date
-          </span>
-          <span
-            className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1 cursor-pointer ml-8"
-            onClick={handleCalendarClick}
-          >
-            <IoChevronDownSharp className="inline-block mb-1 ml-11" />
-          </span>
-          {isCalendarOpen && (
-            <div className="absolute z-10 top-14 right-0 bg-white border border-gray-300 p-3 rounded shadow-lg w-[285px] h-300px">
-              <Calendar  onChange={handleDateChange} value={selectedDate} />
-            </div>
-          )}
-        </div>
+      <section className="border-2 flex relative p-4 justify-between">
+        <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
+          Start Date
+        </span>
+        <span
+          className="font-Poppins text-sm font-normal text-[#5e6d77] mt-1 cursor-pointer"
+          onClick={handleCalendarClick}
+        >
+          <IoChevronDownSharp />
+        </span>
+        {isCalendarOpen && (
+          <div className="absolute z-10 top-14 right-0 bg-white border border-gray-300 p-3 rounded shadow-lg w-[285px] h-300px">
+            <Calendar onChange={handleDateChange} value={selectedDate} />
+          </div>
+        )}
       </section>
-      <section className="border-x-2 border-b-2 flex">
-        <div className="p-4 flex flex-col">
-          <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
-            Choose Transfer Type?
-          </span>
-          <span className="border-2 rounded-lg py-2 px-8 mt-3">
-            <TransferDropdown
-              isTransferAvailable={isTransferAvailable}
-              onSelect={handleTransferTypeChange}
-            />
-          </span>
-        </div>
+      <section className="border-x-2 border-b-2 flex p-5 justify-between items-center">
+        <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
+          Choose Transfer Type?
+        </span>
+        <span>
+          <TransferDropdown
+            isTransferAvailable={isTransferAvailable}
+            onSelect={handleTransferTypeChange}
+          />
+        </span>
       </section>
 
-      <section className="border-x-2 flex">
+      <section className="border-x-2 flex justify-between">
         <div className="flex  flex-col p-4">
           <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
             Adult
@@ -211,12 +207,12 @@ const activityIds = activities.map((activity) => activity._id);
             ${activities[0]?.adultPrice} per person
           </span>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center p-3">
           <IoIosRemoveCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleCountDecrease}
           />
-          <span className="p-3">{count}</span>
+          <span className="p-5">{count}</span>
           <IoIosAddCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleCountIncrease}
@@ -224,7 +220,7 @@ const activityIds = activities.map((activity) => activity._id);
         </div>
       </section>
 
-      <section className="border-x-2 border-y-2 flex">
+      <section className="border-x-2 border-y-2 flex justify-between">
         <div className="flex  flex-col p-4">
           <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
             Child
@@ -236,19 +232,19 @@ const activityIds = activities.map((activity) => activity._id);
             ${activities[0]?.childPrice} per person
           </span>
         </div>
-        <div className="flex items-center ml-1">
+        <div className="flex items-center p-3">
           <IoIosRemoveCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleChildDecrease}
           />
-          <span className="p-3">{child}</span>
+          <span className="p-5">{child}</span>
           <IoIosAddCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleChildIncrease}
           />
         </div>
       </section>
-      <section className="border-x-2 border-b-2 flex">
+      <section className="border-x-2 border-b-2 flex justify-between">
         <div className="flex  flex-col p-4">
           <span className="font-Poppins text-base	font-medium	 text-[#1a2b48] leading-normal">
             Infant
@@ -260,12 +256,12 @@ const activityIds = activities.map((activity) => activity._id);
             ${activities[0]?.infantPrice} per person
           </span>
         </div>
-        <div className="flex items-center ml-1">
+        <div className="flex items-center p-3">
           <IoIosRemoveCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleInfantDecrease}
           />
-          <span className="p-3">{infant}</span>
+          <span className="p-5">{infant}</span>
           <IoIosAddCircleOutline
             className="text-[#5191fa] text-xl"
             onClick={handleInfantIncrease}
@@ -275,7 +271,7 @@ const activityIds = activities.map((activity) => activity._id);
       <section className="border-b-2 border-x-2 ">
         <div className=" py-3 text-center">
           <button
-            className="btn bg-[#5191fa] py-4 px-7 text-[#fff] w-[200px] rounded-md"
+            className="btn bg-[#5191fa] py-3 px-5 text-[#fff] rounded-md"
             onClick={handleBooking}
           >
             <span className="text-md font-medium">BOOK NOW</span>

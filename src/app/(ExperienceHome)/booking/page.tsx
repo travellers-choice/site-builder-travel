@@ -80,6 +80,7 @@ export default function BookingPage() {
       ...formData,
       country: selectedCountryId,
     });
+    
   };
 
  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -246,13 +247,13 @@ export default function BookingPage() {
             <div className="flex w-full md:w-1/2 justify-start items-center bg-gray-100 p-3 gap-2 border">
               <input
                 type="radio"
-                id="tabby"
+                id="offline"
                 name="paymentProcessor"
-                value="tabby"
+                value="offline"
                 onChange={handleChange}
-                checked={formData.paymentProcessor === "offline payment"}
+                checked={formData.paymentProcessor === "offline"}
               />
-              <label htmlFor="tabby">Offline Payment</label>
+              <label htmlFor="offline">Offline Payment</label>
             </div>
             <button
               type="submit"
@@ -272,11 +273,6 @@ export default function BookingPage() {
             <div className="flex items-center gap-1">
               <MdLocationPin />
               <h2>{location}</h2>
-            </div>
-
-            <div className="flex items-center gap-1">
-              <MdInfo />
-              <h2>Vendor: Kaytlyn Alvapriya</h2>
             </div>
           </section>
 

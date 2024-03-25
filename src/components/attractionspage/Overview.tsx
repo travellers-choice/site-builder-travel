@@ -86,7 +86,7 @@ export default function Overview({ data }: { data: Data }) {
     return text.replace(/<[^>]*>/g, "");
   };
 
-  const highlight = removeTags(data.highlights);
+  const highlight = removeTags(data?.highlights);
   
 
   return (
@@ -126,20 +126,20 @@ export default function Overview({ data }: { data: Data }) {
         <section className="flex border-b-2 flex-wrap">
           <div className="w-full md:w-1/2 px-4 mt-2">
             <div className="flex flex-col">
-              {included.map((include, id) => (
+              {included?.map((include, id) => (
                 <div className="flex items-center" key={id}>
                   <FaCheck className="text-[#48ba29] text-lg" />
-                  <span className="p-4">{include.text}</span>
+                  <span className="p-4">{include?.text}</span>
                 </div>
               ))}
             </div>
           </div>
           <div className="w-full md:w-1/2 px-4 mt-2">
             <div className="flex flex-col">
-              {excluded.map((exclude, id) => (
+              {excluded?.map((exclude, id) => (
                 <div className="flex items-center" key={id}>
                   <IoClose className="text-[#e34646] text-lg" />
-                  <span className="p-4">{exclude.text}</span>
+                  <span className="p-4">{exclude?.text}</span>
                 </div>
               ))}
             </div>
