@@ -49,3 +49,13 @@ export async function getUserData(jwtToken:any,dispatch:any) {
       console.log(err, "user-data");
   }
 }
+
+export function formatDate(updatedAt: Date | string) {
+  const options = {
+    month: "long",
+    day: "numeric",
+    year: "numeric",
+  } as Intl.DateTimeFormatOptions;
+  const date = new Date(updatedAt);
+  return date.toLocaleDateString("en-US", options);
+}

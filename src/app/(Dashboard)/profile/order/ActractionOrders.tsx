@@ -43,7 +43,7 @@ export default function ActractionOrders() {
         }
 
         const response = await fetch(
-          "https://api-server-i1.mytravellerschoice.com/api/v1/attractions/orders/all?limit=50",
+          `${process.env.NEXT_PUBLIC_SERVER_URL}/api/v1/attractions/orders/all?limit=50`,
           {
             method: "GET",
             headers: {
@@ -58,6 +58,8 @@ export default function ActractionOrders() {
 
         const data = await response?.json();
         const orderData = data?.result;
+        console.log(orderData,"orderdata");
+        
         setOrders(orderData.data);
         setLoading(false);
       } catch (error) {
